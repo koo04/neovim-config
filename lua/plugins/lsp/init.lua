@@ -29,8 +29,54 @@ return {
 					},
 				},
 				dockerls = {},
+				gopls = {
+					settings = {
+						gopls = {
+							analyses = {
+								unusedparams = true,
+							},
+							hints = {
+								assignVariableTypes = true,
+								compositeLiteralFields = true,
+								compositeLiteralTypes = true,
+								constantValues = true,
+								functionTypeParameters = true,
+								parameterNames = true,
+								rangeVariableTypes = true,
+							},
+							staticcheck = true,
+							semanticTokens = true,
+						},
+					},
+				},
+				golangci_lint_ls = {},
 			},
-			setup = {},
+			setup = {
+				gopls = function(_, _)
+					local lsp_utils = require("plugins.lsp.utils")
+					lsp_utils.on_attach(function(client, bufnr)
+						local map = function(mode, lhs, rhs, desc)
+							if desc then
+								desc = desc
+							end
+							vim.keymap.set(
+								mode,
+								lhs,
+								rhs,
+								{ silent = true, desc = desc, buffer = bufnr, noremap = true }
+							)
+						end
+            -- stylua: ignore
+            if client.name == "gopls" then
+              map("n", "<leader>ly", "<cmd>GoModTidy<cr>", "Go Mod Tidy")
+              map("n", "<leader>lc", "<cmd>GoCoverage<Cr>", "Go Test Coverage")
+              map("n", "<leader>lt", "<cmd>GoTest<Cr>", "Go Test")
+              map("n", "<leader>lR", "<cmd>GoRun<Cr>", "Go Run")
+              map("n", "<leader>dT", "<cmd>lua require('dap-go').debug_test()<cr>", "Go Debug Test")
+            end
+					end)
+				end,
+			},
 		},
 		config = function(plugin, opts)
 			require("plugins.lsp.servers").setup(plugin, opts)
@@ -46,6 +92,18 @@ return {
 				"ruff",
 				"debugpy",
 				"codelldb",
+				"delve",
+				"gotests",
+				"golangci-lint",
+				"golangci-lint-langserver",
+				"impl",
+				"gomodifytags",
+				"iferr",
+				"gotestsum",
+				"goimports",
+				"gofumpt",
+				"iferr",
+				"gotests",
 			},
 		},
 		config = function(_, opts)
@@ -58,6 +116,13 @@ return {
 				end
 			end
 		end,
+	},
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"leoluz/nvim-dap-go",
+			opts = {},
+		},
 	},
 	{
 		"jose-elias-alvarez/null-ls.nvim",
@@ -82,5 +147,18 @@ return {
 			"nvim-tree/nvim-web-devicons",
 		},
 		config = true,
+	},
+	{
+		"ray-x/guihua.lua",
+		event = { "CmdlineEnter" },
+		opts = {},
+		config = true,
+		dependencies = {
+			"ray-x/guihua.lua",
+			"neovim/nvim-lspconfig",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		ft = { "go", "gomod" },
+		build = ':lua require("go.install").update_all_sync()', -- if you need to install/update all binaries
 	},
 }
