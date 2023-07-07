@@ -12,12 +12,12 @@ if [ ! -d "$XDG_CONFIG_HOME/nvim" ]; then
 fi
 
 # link init.lua, if not already linked
-if [ ! -L "$XDG_CONFIG_HOME/nvim/init.lua" ]; then
+if [ ! -f "$XDG_CONFIG_HOME/nvim/init.lua" ]; then
   ln -s $PWD/init.lua $XDG_CONFIG_HOME/nvim/init.lua
 fi
 
 # link lua directory, if not already linked
-if [ ! -L "$XDG_CONFIG_HOME/nvim/lua" ]; then
+if [ ! -f "$XDG_CONFIG_HOME/nvim/lua" ]; then
   ln -s $PWD/lua $XDG_CONFIG_HOME/nvim/lua
 fi
 
