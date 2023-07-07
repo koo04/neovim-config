@@ -3,6 +3,11 @@
 # make sure this repo is up to date
 git pull
 
+# install a few things from apt
+sudo apt-get install -y fd-find ripgrep fzf python3-pip
+# install neovim from snap
+sudo snap install neovim
+
 # set $XDG_CONFIG_HOME if not already set
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
 
