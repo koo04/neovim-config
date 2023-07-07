@@ -1,15 +1,17 @@
 #!/bin/bash
 
+# set $XDG_CONFIG_HOME if not already set
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
+
 # make sure this repo is up to date
 git pull
 
+sudo -v
 # install a few things from apt
+sudo apt-get update 
 sudo apt-get install -y fd-find ripgrep fzf python3-pip
 # install neovim from snap
-sudo snap install neovim
-
-# set $XDG_CONFIG_HOME if not already set
-XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
+sudo snap install nvim --classic
 
 # check if the $XDG_CONFIG_HOME/nvim directory exists
 if [ ! -d "$XDG_CONFIG_HOME/nvim" ]; then
@@ -17,12 +19,12 @@ if [ ! -d "$XDG_CONFIG_HOME/nvim" ]; then
 fi
 
 # link init.lua, if not already linked
-if [ ! -f "$XDG_CONFIG_HOME/nvim/init.lua" ]; then
+if [ ! -L "$XDG_CONFIG_HOME/nvim/init.lua" ]; then
   ln -s $PWD/init.lua $XDG_CONFIG_HOME/nvim/init.lua
 fi
 
 # link lua directory, if not already linked
-if [ ! -f "$XDG_CONFIG_HOME/nvim/lua" ]; then
-  ln -s $PWD/lua $XDG_CONFIG_HOME/nvim/lua
+if [ ! -L "$XDG_CONFIG_HOME/nvim/lua" ]; then
+  ln -s $PWD/lua $XDG_CONFIG_HOME/nvim/
 fi
 
