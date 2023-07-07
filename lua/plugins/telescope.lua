@@ -5,8 +5,6 @@ return {
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"nvim-telescope/telescope-file-browser.nvim",
 			"nvim-telescope/telescope-project.nvim",
-			"ahmedkhalf/project.nvim",
-			"cljoly/telescope-repo.nvim",
 			"stevearc/aerial.nvim",
 		},
 		cmd = "Telescope",
@@ -16,12 +14,11 @@ return {
 			{ "<leader>fo", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
 			{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Buffers" },
 			{ "<leader>fr", "<cmd>Telescope file_browser<cr>", desc = "Browser" },
-			{ "<leader>ps", "<cmd>Telescope repo list<cr>", desc = "Search" },
 			{ "<leader>hs", "<cmd>Telescope help_tags<cr>", desc = "Search" },
 			{
 				"<leader>pp",
 				function()
-					require("telescope").extensions.project.project({ display_type = "minimal" })
+					require("telescope").extensions.project.project({ display_type = "full" })
 				end,
 				desc = "List",
 			},
@@ -64,7 +61,7 @@ return {
 						theme = "dropdown",
 						previewer = false,
 						hidden = true,
-						find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
+						--find_command = {"rg", "--files", "--hidden", "-g", "!.git" },
 					},
 					git_files = {
 						theme = "dropdown",
@@ -85,6 +82,9 @@ return {
 					project = {
 						hidden_files = false,
 						theme = "dropdown",
+						base_dirs = {
+							"~/git",
+						},
 					},
 				},
 			}
@@ -92,22 +92,11 @@ return {
 			telescope.load_extension("fzf")
 			telescope.load_extension("file_browser")
 			telescope.load_extension("project")
-			telescope.load_extension("projects")
 			telescope.load_extension("aerial")
 		end,
 	},
 	{
 		"stevearc/aerial.nvim",
 		config = true,
-	},
-	{
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({
-				detection_methods = { "pattern", "lsp" },
-				patterns = { ".git" },
-				ignore_lsp = { "null-ls" },
-			})
-		end,
 	},
 }
