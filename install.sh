@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd -
+cd "$(dirname "$(readlink -f "$0")")"
 
 # set $XDG_CONFIG_HOME if not already set
 XDG_CONFIG_HOME=${XDG_CONFIG_HOME:=$HOME/.config}
