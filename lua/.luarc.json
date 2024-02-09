@@ -1,8 +1,0 @@
-{
-    "workspace.library": [
-        "/home/douglas/.local/share/nvim/lazy/neodev.nvim/types/stable",
-        "/squashfs-root/usr/share/nvim/runtime/lua",
-        "/home/douglas/git/neovim-config/lua",
-        "${3rd}/luv/library"
-    ]
-}
