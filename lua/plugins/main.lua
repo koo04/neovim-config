@@ -83,6 +83,15 @@ return {
     },
   },
 
+  -- dapui
+  {
+    "rcarriga/nvim-dap-ui",
+    dependencies = {
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+    },
+  },
+
   -- add pyright to lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -92,6 +101,7 @@ return {
       servers = {
         -- pyright will be automatically installed with mason and loaded with lspconfig
         pyright = {},
+        gopls = {},
       },
     },
   },
