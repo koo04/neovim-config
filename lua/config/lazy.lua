@@ -76,3 +76,5 @@ require("lazy").setup({
     },
   },
 })
+
+-- require("telescope").setup({ default = { file_ignore_patters = { ".git/*", "go/*" } } })
