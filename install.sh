@@ -6,10 +6,10 @@ sudo -E bash /tmp/nodesource_setup.sh
 sudo apt-get install -y nodejs
 
 # check if nvim is not installed
-if ! command -v nvim &> /dev/null
-then
-    sudo snap install nvim --classic
+if ! command -v nvim &>/dev/null; then
+  sudo snap install nvim --classic
 fi
+
 # ripgrep
 LOC=$(pwd)
 cd /tmp/
@@ -25,12 +25,6 @@ sudo install /tmp/lazygit /usr/local/bin
 
 # check if the symbolic link exists already
 if [ -L $HOME/.config/nvim ]; then
-    rm -rf $HOME/.config/nvim $HOME/.local/share/nvim $HOME/.local/state/nvim $HOME/.cache/nvim
+  rm -rf $HOME/.config/nvim $HOME/.local/share/nvim $HOME/.local/state/nvim $HOME/.cache/nvim
+  git clone git@github.com:koo04/neovim-config $HOME/.config/nvim
 fi
-
-# clone the repo
-if [ ! -d $HOME/.config/nvim ]; then
-    git clone git@github.com:koo04/neovim-config $HOME/.config/nvim
-fi
-
-ln -s $(pwd) $HOME/.config/nvim
