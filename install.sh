@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get install -y wget build-essential make python-is-python3 python3-pip jq curl python3-venv cargo fd-find
+sudo apt-get install -y wget build-essential make python-is-python3 python3-pip jq curl python3-venv cargo fd-find unzip
 curl -fsSL https://deb.nodesource.com/setup_22.x -o /tmp/nodesource_setup.sh
 sudo -E bash /tmp/nodesource_setup.sh
 sudo apt-get install -y nodejs
