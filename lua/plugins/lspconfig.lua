@@ -2,6 +2,15 @@ return {
   "neovim/nvim-lspconfig",
   opts = {
     servers = {
+      yamlls = {
+        settings = {
+          yaml = {
+            format = {
+              enable = false,
+            },
+          },
+        },
+      },
       gopls = {
         settings = {
           gopls = {
@@ -28,7 +37,7 @@ return {
             analyses = {
               fieldalignment = true,
               nilness = true,
-              unusedparams = true,
+              unusedparams = false,
               unusedwrite = true,
               useany = true,
             },

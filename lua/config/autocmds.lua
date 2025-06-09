@@ -11,3 +11,13 @@
 --   vim.api.nvim_buf_set_keymap(0, "t", "<C-k>", [[<C-\><C-n><C-W>k]], opts)
 --   vim.api.nvim_buf_set_keymap(0, "t", "<C-l>", [[<C-\><C-n><C-W>l]], opts)
 -- end
+
+--require("lint").linters_by_ft = {
+--  go = { "golangci-lint" },
+--}
+
+--vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost", "InsertLeave" }, {
+--  callback = function()
+--    require("lint").try_lint()
+--  end,
+--})
